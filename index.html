@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>A Very Important Question</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: #0b0b0b;
+      color: #f5e6c8;
+      font-family: 'Cinzel', serif;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 40px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    button {
+      background: #7a5c2e;
+      color: #fff;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      margin-top: 30px;
+    }
+
+    /* FLOATING CANDLES */
+    .candle {
+      position: fixed;
+      bottom: -100px;
+      width: 12px;
+      height: 40px;
+      background: #f5f5f5;
+      border-radius: 3px;
+      animation: floatUp linear infinite;
+      box-shadow: 0 0 10px rgba(255,200,100,0.8);
+    }
+
+    .candle::before {
+      content: '';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 12px;
+      background: radial-gradient(circle, #ffd27d 0%, #ff9f1c 60%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-120vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LANDING -->
+  <div class="section" id="intro">
+    <h1>I solemnly swear…</h1>
+    <p>that I have something important to ask you.</p>
+    <button onclick="showMap()">Reveal the Map</button>
+  </div>
+
+  <!-- MAP -->
+  <div class="section hidden" id="map">
+    <h1>The Marauder’s Map</h1>
+    <p>(Tap the footprints)</p>
+    <button onclick="showLetter()">Follow the Path</button>
+  </div>
+
+  <!-- LETTER -->
+  <div class="section hidden" id="letter">
+    <div style="background:#fff8e7; color:#3b2f1c; padding:40px; max-width:650px; border:3px solid #7a5c2e;">
+      <h1 style="text-align:center;">HOGWARTS SCHOOL OF WITCHCRAFT & WIZARDRY</h1>
+      <p style="text-align:center; font-size:14px;">
+        Headmaster: Albus Dumbledore
+      </p>
+      <hr>
+      <p>Dear <strong>My Favorite Witch</strong>,</p>
+      <p>
+        We are pleased to inform you that you have been invited to participate
+        in a most important magical occasion.
+      </p>
+      <p>
+        Term begins on February 14th, where candlelight, laughter,
+        and an unreasonable amount of affection will be provided.
+      </p>
+      <p>
+        No matter your house, your wand, or your charms,
+        there is no spell more powerful than the one that keeps leading me back to you.
+      </p>
+      <p style="text-align:center; font-size:20px; margin-top:30px;">
+        <strong>terra Will you be my Valentine?</strong>
+      </p>
+      <div style="text-align:center;">
+        <button onclick="accept()">Always</button>
+        <button onclick="accept()">Obviously</button>
+      </div>
+      <p style="margin-top:40px;">
+        Love,<br>
+        <strong>Liam</strong>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // SHOW/HIDE SECTIONS
+    function showMap() {
+      document.getElementById('intro').classList.add('hidden');
+      document.getElementById('map').classList.remove('hidden');
+    }
+
+    function showLetter() {
+      document.getElementById('map').classList.add('hidden');
+      document.getElementById('letter').classList.remove('hidden');
+    }
+
+    function accept() {
+      alert("10 points to your house 💖✨");
+    }
+
+    // FLOATING CANDLES
+    function createCandle() {
+      const candle = document.createElement('div');
+      candle.className = 'candle';
+      candle.style.left = Math.random() * 100 + 'vw';
+      candle.style.animationDuration = (8 + Math.random() * 5) + 's';
+      document.body.appendChild(candle);
+
+      setTimeout(() => {
+        candle.remove();
+      }, 13000);
+    }
+
+    setInterval(createCandle, 600);
+  </script>
+
+</body>
+</html>
